@@ -1,10 +1,10 @@
-import User from "../../models/User.js";
+import UserService from "../../services/userService.js";
 
 class UserController {
   async createUser(req, res) {
+    const userAttributes = req.body;
     try {
-      const newUser = new User(req.body); 
-      const savedUser = await newUser.save();
+      const savedUser = await UserService.createUser(userAttributes);
       res.status(201).json(savedUser);
     } catch (error) {
       console.error("Erro ao criar um usuário:", error);
@@ -14,7 +14,7 @@ class UserController {
 
   async getAllUsers(req, res) {
     try {
-      const users = await User.find();
+      const users = await UserService.getAllUsers();
       res.status(200).json(users);
     } catch (error) {
       console.error("Erro ao buscar usuários:", error);
@@ -26,7 +26,7 @@ class UserController {
     const userId = req.params.id;
 
     try {
-      const user = await User.findById(userId);
+      const user = await UserService.getUserById(userId);
       if (!user) {
         return res.status(404).json({ message: "Usuário não encontrado" });
       }
@@ -39,11 +39,13 @@ class UserController {
 
   async updateUserById(req, res) {
     const userId = req.params.id;
+    const updatedAttributes = req.body;
 
     try {
-      const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
-        new: true,
-      });
+      const updatedUser = await UserService.updateUserById(
+        userId,
+        updatedAttributes
+      );
       if (!updatedUser) {
         return res.status(404).json({ message: "Usuário não encontrado" });
       }
@@ -58,8 +60,8 @@ class UserController {
     const userId = req.params.id;
 
     try {
-      const deletedUser = await User.findByIdAndRemove(userId);
-      if (!deletedUser) {
+      const result = await UserService.deleteUserById(userId);
+      if (!result) {
         return res.status(404).json({ message: "Usuário não encontrado" });
       }
       res.status(204).end();
