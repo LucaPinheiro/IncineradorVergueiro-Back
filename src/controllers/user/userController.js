@@ -3,17 +3,15 @@ import User from "../../models/User.js";
 class UserController {
   async createUser(req, res) {
     try {
-      console.log("Criando um novo usuário...");
-      const newUser = new User(req.body);
-      console.log("Novo usuário criado.");
+      const newUser = new User(req.body); 
       const savedUser = await newUser.save();
-      console.log("Usuário salvo no banco de dados.");
       res.status(201).json(savedUser);
     } catch (error) {
       console.error("Erro ao criar um usuário:", error);
       res.status(500).send("Erro interno do servidor");
     }
   }
+
   async getAllUsers(req, res) {
     try {
       const users = await User.find();
