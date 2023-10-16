@@ -1,5 +1,6 @@
 import express from "express";
-import userRoutes from "./userRoutes.js"; 
+import userRoutes from "./userRoutes.js";
+import productRouter from "../routes/productRoutes.js";
 
 const routes = (app) => {
   app.route("/").get((req, res) => res.status(200).send("Usina Eco Cultural"));
@@ -11,8 +12,7 @@ const routes = (app) => {
   userRouter.use("/users", userRoutes);
 
   //roteador de usuário principal
-  app.use(express.json());  
-  app.use(userRouter);
+  app.use(express.json(), userRouter, productRouter);
 };
 
 export default routes;
