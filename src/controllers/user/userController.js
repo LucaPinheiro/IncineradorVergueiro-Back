@@ -42,7 +42,7 @@ class UserController {
     const updatedAttributes = req.body;
 
     try {
-      const updatedUser = await UserService.updateUserById(
+      const updatedUser = await UserService.updateUser(
         userId,
         updatedAttributes
       );
@@ -60,7 +60,7 @@ class UserController {
     const userId = req.params.id;
 
     try {
-      const result = await UserService.deleteUserById(userId);
+      const result = await UserService.deleteUser(userId);
       if (!result) {
         return res.status(404).json({ message: "Usuário não encontrado" });
       }

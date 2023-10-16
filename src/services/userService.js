@@ -1,4 +1,4 @@
-import User from "../models/User.js"; 
+import User from "../models/User.js";
 
 class UserService {
   async createUser(userAttributes) {
@@ -25,7 +25,7 @@ class UserService {
   }
 
   async deleteUser(userId) {
-    const deletedUser = await User.findByIdAndRemove(userId);
+    const deletedUser = await User.findByIdAndDelete(userId);
     return deletedUser;
   }
 }
