@@ -1,6 +1,7 @@
 import express from "express";
 import productRouter from "../routes/productRoutes.js";
 import eventRouter from "../routes/eventRoutes.js";
+import authRouter from "../routes/authRoutes.js";
 
 const routes = (app) => {
   app.route("/").get((req, res) => res.status(200).send("Usina Eco Cultural"));
@@ -9,7 +10,7 @@ const routes = (app) => {
   const userRouter = express.Router();
 
   // Roteador de eventos
-  app.use(express.json(), userRouter, productRouter, eventRouter); 
+  app.use(express.json(), userRouter, productRouter, eventRouter, authRouter);
 };
 
 export default routes;
