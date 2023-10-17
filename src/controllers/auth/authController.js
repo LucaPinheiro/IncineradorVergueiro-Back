@@ -7,6 +7,11 @@ const revokedTokens = [];
 export default class AuthController {
   async login(req, res) {
     const { email, password } = req.body;
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ message: "Formato de email inválido" });
+    }
+
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -44,4 +49,9 @@ export default class AuthController {
 
     res.status(204).end();
   }
+}
+
+function isValidEmail(email) {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  return emailRegex.test(email);
 }
