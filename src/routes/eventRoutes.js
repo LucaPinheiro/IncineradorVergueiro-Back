@@ -5,11 +5,11 @@ import errorHandler from "../middlewares/errorHandler.js";
 const eventRouter = express.Router();
 const eventController = new EventController();
 
-eventRouter.post("/event", eventController.createEvent);
-eventRouter.get("/event", eventController.getAllEvents);
-eventRouter.get("/event/:id", eventController.getEventById);
-eventRouter.put("/event/:id", eventController.updateEvent);
-eventRouter.delete("/event/:id", eventController.deleteEvent);
+eventRouter.post("/events", eventController.createEvent);
+eventRouter.get("/events", eventController.getAllEvents);
+eventRouter.get("/events/:id", eventController.getEventById);
+eventRouter.put("/events/:id", eventController.updateEvent);
+eventRouter.delete("/events/:id", eventController.deleteEvent);
 
 eventRouter.use(errorHandler);
 
