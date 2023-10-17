@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../../models/User.js";
+import RevokedToken from "../../models/revokedTokenModel.js";
 
 const revokedTokens = [];
 
@@ -28,16 +29,19 @@ export default class AuthController {
 
   async logout(req, res) {
     const token = req.header("Authorization");
-
     if (!token) {
-      return res.status(401).json({ message: "Token de autenticação não fornecido" });
+      return res
+        .status(401)
+        .json({ message: "Token de autenticação não fornecido" });
     }
 
     if (revokedTokens.includes(token)) {
       return res.status(401).json({ message: "Token já foi revogado" });
     }
 
-    revokedTokens.push(token);
+    const revokedToken = new RevokedToken({ token });
+    await revokedToken.save();
+
     res.status(204).end();
   }
 }
