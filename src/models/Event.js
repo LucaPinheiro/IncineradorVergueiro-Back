@@ -19,7 +19,7 @@ const eventSchema = new mongoose.Schema({
     type: String,
   },
   participants: {
-    type: [String],
+    type: Number,
   },
   description: {
     type: String,
