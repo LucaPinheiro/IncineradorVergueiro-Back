@@ -13,6 +13,7 @@ class AuthService {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.log("AuthService.verifyToken: Token inválido.");
+        console.error(err); 
         return res.status(401).json({ message: "Token inválido" });
       }
 
