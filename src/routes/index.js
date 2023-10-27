@@ -11,7 +11,7 @@ const routes = (app) => {
   // Roteador para as rotas de usuário
   const userRouter = express.Router();
 
-  // Roteador de eventos
+  // Roteador 
   app.use(
     express.json(),
     userRouter,
