@@ -29,7 +29,7 @@ export default class AuthController {
         expiresIn: "1h",
       }
     );
-    res.json({ token });
+    res.json({ token, userId: user.id });
   }
 
   async logout(req, res) {
