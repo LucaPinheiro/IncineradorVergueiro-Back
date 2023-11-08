@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     validate: {
       validator: function (value) {
-        return /^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/.test(value); 
+        return /^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/.test(value);
       },
       message: "CPF deve estar no formato correto (ex: 123.456.789-01)",
     },
@@ -41,6 +41,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    validate: {
+      validator: function (value) {
+        return /^\(\d{2}\)9\d{4}-\d{4}$/.test(value);
+      },
+      message: "Celular deve estar no formato correto (ex: (11)9 6774-8079)",
+    },
   },
 });
 
