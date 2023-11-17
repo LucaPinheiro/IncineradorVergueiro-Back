@@ -14,6 +14,10 @@ const orderItemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  date: {
+    type: String,
+    required: true,
+  },
 });
 
 const newOrderSchema = new mongoose.Schema({
@@ -22,7 +26,7 @@ const newOrderSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  orderItems: [orderItemSchema], 
+  orderItems: [orderItemSchema],
   totalPrice: {
     type: Number,
     required: true,
