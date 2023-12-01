@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors"; 
 import connectDB from "./config/dbConnect.js";
 import routes from "./routes/index.js";
 import errorHandler from "./middlewares/errorHandler.js";
@@ -12,6 +13,10 @@ conexao.once("open", () => {
 });
 
 const app = express();
+
+// Configurar o middleware CORS
+app.use(cors());
+
 app.use(express.json());
 app.use(userRouter);
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const eventSchema = new mongoose.Schema({
+const suggestionEventSchema = new mongoose.Schema({
   nameEvent: {
     type: String,
     required: true,
@@ -25,8 +25,16 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
-const Event = mongoose.model("Event", eventSchema);
+const SuggestionEvent = mongoose.model(
+  "SuggestionEvent",
+  suggestionEventSchema
+);
 
-export default Event;
+export default SuggestionEvent;
